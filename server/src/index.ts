@@ -4,6 +4,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import { middleware } from "./Middleware/middleware";
+
+import  tenantRoutes from "./routes/tenantRoutes";
 
 dotenv.config();
 const app = express();
@@ -18,6 +21,8 @@ app.use(cors());
 app.get('/',(req,res)=>{
     res.send("HOME ROUTE!!!!")
 })
+
+app.use("/tenants", middleware(["tenants"]),tenantRoutes)
 
 const port = process.env.PORT || 3002;
 app.listen(port, ()=>{
