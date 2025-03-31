@@ -7,6 +7,7 @@ import morgan from "morgan";
 import { middleware } from "./Middleware/middleware";
 
 import  tenantRoutes from "./routes/tenantRoutes";
+import  managerRoutes from "./routes/managerRoutes";
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use("/tenants", middleware(["tenants"]),tenantRoutes)
+app.use("/managers", middleware(["manager"]), managerRoutes)
 
 const port = process.env.PORT || 3002;
 app.listen(port, ()=>{

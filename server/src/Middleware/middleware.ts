@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { JwtPayload } from "jsonwebtoken";
+import { JsonWebTokenError, JwtPayload } from "jsonwebtoken";
 
 interface DecodedToken extends JwtPayload{
     sub: string;
