@@ -6,8 +6,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { middleware } from "./Middleware/middleware";
 
-import  tenantRoutes from "./routes/tenantRoutes";
-import  managerRoutes from "./routes/managerRoutes";
+import tenantRoutes from "./routes/tenantRoutes";
+import managerRoutes from "./routes/managerRoutes";
 
 dotenv.config();
 const app = express();

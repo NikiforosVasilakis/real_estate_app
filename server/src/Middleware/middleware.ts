@@ -44,6 +44,6 @@ export const middleware = (allowedRules: string[]) =>{
             res.status(400).json({message:"Invalid token"})
             return;
         }
-        next()
+        next();
     }
 }

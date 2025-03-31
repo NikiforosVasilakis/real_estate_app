@@ -4,6 +4,6 @@ import {getManager, createManager} from "../controllers/managerControllers"
 const router = Express.Router();
 
 router.get("/:cognitoID", getManager)
-router.post("/",createManager);
+router.post("/", createManager);
 
 export default router;
