@@ -1,5 +1,5 @@
 import express  from "express";
-import {createTenant, getTenant} from "./controllers/tenantControllers"
+import {createTenant, getTenant} from "../controllers/tenantController"
 
 
 

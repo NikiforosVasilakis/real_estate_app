@@ -33,9 +33,10 @@ export const api = createApi({
 
           let userDetailsResponse = await fetchWithBQ(endpoint);
 
-          if(userDetailsResponse.error && userDetailsResponse.status === 404){
+          if(userDetailsResponse.error && userDetailsResponse.error.status === 404){
             userDetailsResponse = await createNewUserInDatabase(
               user,
+              idToken,
               userRole,
               fetchWithBQ,
             )
@@ -45,6 +46,7 @@ export const api = createApi({
             data: {
               cognitoInfo: {...user},
               userInfo: userDetailsResponse.data as Tenant | Manager,
+              userRole
             }
           }
         }catch(error: any){

@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express";
-import { JsonWebTokenError, JwtPayload } from "jsonwebtoken";
+import { Request, Response, NextFunction } from "express";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 interface DecodedToken extends JwtPayload{
     sub: string;
@@ -9,7 +9,7 @@ interface DecodedToken extends JwtPayload{
 declare global{
     namespace Express{
         interface Request{
-            user?:{
+            user?: {
                 id: string;
                 role: string;
             }
@@ -21,18 +21,18 @@ export const middleware = (allowedRules: string[]) =>{
     return (req: Request, res: Response, next: NextFunction):void =>{
         const token = req.headers.authorization?.split(" ")[1]
         
-        if (!token){
-            res.status(401).json({message:"Unauthorised"})
+        if (!token) {
+            res.status(401).json({ message: "Unauthorized" });
             return;
         }
 
-        try{
+        try {
             const decoded = jwt.decode(token) as DecodedToken;
             const userRole = decoded["custom:role"] || "";
             req.user = {
-                id: decoded.sub,
-                role: userRole
-            }
+              id: decoded.sub,
+              role: userRole,
+            };
             const hasAccess = allowedRules.includes(userRole.toLowerCase())
 
             if(!hasAccess){
@@ -44,5 +44,6 @@ export const middleware = (allowedRules: string[]) =>{
             res.status(400).json({message:"Invalid token"})
             return;
         }
+        next()
     }
 }
