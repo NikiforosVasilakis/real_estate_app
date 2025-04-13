@@ -13,7 +13,7 @@ const TenantSettings = () => {
 
   if (isLoading) return <>Loading...</>;
 
-  // Still missing user info? Show a friendly fallback instead of crashing
+  //Show a friendly fallback instead of crashing
   if (!authUser || !authUser.userInfo) {
     console.warn("authUser or authUser.userInfo is missing", authUser);
     return <>Error: Could not load user info</>;
