@@ -8,6 +8,8 @@ import { middleware } from "./Middleware/middleware";
 
 import tenantRoutes from "./routes/tenantRoutes";
 import managerRoutes from "./routes/managerRoutes";
+import propertyRoutes from "./routes/propertyRoutes";
+import leaseRoutes from "./routes/leaseRoutes"
 
 dotenv.config();
 const app = express();
@@ -23,9 +25,10 @@ app.get('/',(req,res)=>{
     res.send("HOME ROUTE!!!!")
 })
 
+app.use("/properties", propertyRoutes)
 app.use("/tenants", middleware(["tenants"]),tenantRoutes)
 app.use("/managers", middleware(["manager"]), managerRoutes)
-
+app.use("/leases", leaseRoutes)
 const port = process.env.PORT || 3002;
 app.listen(port, ()=>{
     console.log(`server running on ${port}`);

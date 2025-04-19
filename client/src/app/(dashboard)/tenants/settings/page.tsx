@@ -14,6 +14,7 @@ const TenantSettings = () => {
   if (isLoading) return <>Loading...</>;
 
   //Show a friendly fallback instead of crashing
+
   if (!authUser || !authUser.userInfo) {
     console.warn("authUser or authUser.userInfo is missing", authUser);
     return <>Error: Could not load user info</>;
@@ -26,7 +27,7 @@ const TenantSettings = () => {
 
   const handleSubmit = async (data: typeof initialData) => {
     await updateTenant({
-      cognitoId: authUser?.cognitoInfo?.userId,
+      cognitoId: authUser.cognitoInfo.userId,
       ...data,
     });
   };
