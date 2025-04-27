@@ -9,6 +9,12 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
+const middleware_1 = require("./Middleware/middleware");
+const tenantRoutes_1 = __importDefault(require("./routes/tenantRoutes"));
+const managerRoutes_1 = __importDefault(require("./routes/managerRoutes"));
+const propertyRoutes_1 = __importDefault(require("./routes/propertyRoutes"));
+const leaseRoutes_1 = __importDefault(require("./routes/leaseRoutes"));
+const applicationRoutes_1 = __importDefault(require("./routes/applicationRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -21,6 +27,11 @@ app.use((0, cors_1.default)());
 app.get('/', (req, res) => {
     res.send("HOME ROUTE!!!!");
 });
+app.use("/applications", applicationRoutes_1.default);
+app.use("/properties", propertyRoutes_1.default);
+app.use("/leases", leaseRoutes_1.default);
+app.use("/tenants", (0, middleware_1.middleware)(["tenants"]), tenantRoutes_1.default);
+app.use("/managers", (0, middleware_1.middleware)(["manager"]), managerRoutes_1.default);
 const port = process.env.PORT || 3002;
 app.listen(port, () => {
     console.log(`server running on ${port}`);

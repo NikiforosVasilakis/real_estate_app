@@ -57,6 +57,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/lodash": "^4.17.16",
+    "@types/lodash.merge": "^4.6.9",
     "@types/node": "^20.17.27",
     "@types/react": "^19",
     "@types/react-dom": "^19",
